@@ -437,3 +437,29 @@ class HotelVerificationAPIView(APIView):
                 {"error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+        
+# Hotel staff -------------------------------------------------------------------------------------------------
+
+# class HasAddHotelAdminStaffPermission(BasePermission):
+#     def has_permission(self, request, view):
+#         return request.user.has_perm('Hotel.add_hotelstaff')
+
+# class HotelStaffCreateAPIView(APIView):
+#     permission_classes = [IsAuthenticated, HasAddHotelAdminStaffPermission]
+    
+#     def post(self, request, *args, **kwargs):
+#         try:
+#             serializer = HotelAdminCreateSerializer(data=request.data)
+#             if serializer.is_valid():
+#                 serializer.save()
+#                 return Response(
+#                     {"message": "Hotel Staff created successfully"},
+#                     status=status.HTTP_201_CREATED
+#                 )
+#             return Response(
+#                 {"error": serializer.errors},
+#                 status=status.HTTP_400_BAD_REQUEST
+#             )
+#         except Exception as e:
+#             logger.exception("Error creating Hotel Admin")
+#             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

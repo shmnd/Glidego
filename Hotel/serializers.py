@@ -474,6 +474,7 @@ class HotelAdminCreateSerializer(serializers.ModelSerializer):
         user = UserAccount(
             email=validated_data['email'],
             username=validated_data['username'],
+            roles='hotel-admin', 
         )
         user.set_password(password)
         user.save()

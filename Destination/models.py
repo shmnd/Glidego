@@ -55,6 +55,22 @@ class Destination(AbstractDateFieldMix):
         family = "family", _("Family")
         nature = "nature", _("Nature")
 
+    
+    DESTINATION_TYPE = [
+        ('beach', 'Beach'),
+        ('mountain', 'Mountain'),
+        ('city', 'City'),
+        ('island', 'Island'),
+        ('desert', 'Desert'),
+        ('countryside', 'Countryside'),
+        ('forest', 'Forest'),
+        ('historical', 'Historical'),
+        ('adventure', 'Adventure'),
+        ('wildlife', 'Wildlife / Safari'),
+        ('other', 'Other'),
+    ]
+
+
     main_destination_image = models.FileField(_('Main Destination Image'), upload_to='destinations/main/', blank=True, null=True)
     main_destination_city = models.CharField(_('Main Destination City'), max_length=255, blank=True, null=True)
     main_destination_state = models.CharField(_('Main Destination State'), max_length=255, blank=True, null=True)
@@ -82,6 +98,9 @@ class Destination(AbstractDateFieldMix):
 
     opening_time = models.TextField(_('Opening Time to Visit'), blank=True, null=True)
     closing_time = models.TextField(_('Closing Time to Visit'), blank=True, null=True)
+    
+    destination_type = models.CharField(max_length=255,choices=DESTINATION_TYPE,blank=True, null=True)
+
 
 
 

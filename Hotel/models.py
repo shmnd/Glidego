@@ -124,7 +124,7 @@ class HotelAdmin(AbstractDateTimeFieldBaseModel):
     is_verified = models.BooleanField(default=False)
     password = models.CharField(max_length=128,blank=True, null=True)
     permissions = models.ManyToManyField(
-        Permission,
+        'auth.Permission',
         related_name='hoteladmin_permissions',
         blank=True,
     )
