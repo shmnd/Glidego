@@ -157,7 +157,7 @@ class CabAdmin(AbstractDateTimeFieldBaseModel):
     aadhar = models.ImageField(upload_to='Cabs/aadhar/')
     password = models.CharField(max_length=128, blank=True, null=True)
     permissions = models.ManyToManyField(
-        Permission,
+        'auth.Permission',
         related_name='cabadmin_permissions',
         blank=True,
     )

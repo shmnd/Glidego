@@ -109,6 +109,9 @@ class StaffCreateSerializer(serializers.ModelSerializer):
             'view_hoteladmin': 'view_hoteladmin',
             'change_hoteladmin': 'change_hoteladmin',
             'delete_hoteladmin': 'delete_hoteladmin',
+
+            # 'add_hotelstaff': 'add_hotelstaff',
+
         }
 
         # Convert frontend codenames to Django codenames

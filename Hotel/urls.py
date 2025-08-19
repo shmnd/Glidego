@@ -38,4 +38,8 @@ urlpatterns = [
     path('hotel-admin-list/', HotelAdminListAPIView.as_view(), name='hotel-admin-list'),
     path('hotel-admin-update/<int:pk>/', HotelAdminUpdateAPIView.as_view(), name='hotel-admin-update'),
     path('hotel-admin-detail/<int:pk>/', HotelAdminDetailAPIView.as_view(), name='hotel-admin-detail'),
+
+    # stafff
+    # path('hotel-staff-creation/', HotelStaffCreateAPIView.as_view(), name='hotel-staff-create'),
+
 ]

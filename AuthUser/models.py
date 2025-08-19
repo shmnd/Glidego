@@ -75,6 +75,16 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
         ('others', 'Others'),
     )
 
+    ROLES_CHOICES = (
+        ('super-admin', 'Super-Admin'),
+        ('employee', 'Employee'),
+        ('cab-admin', 'Cab-admin'),
+        ('cab-admin', 'Cab-admin'),
+        ('cab-admin-staff', 'Cab-admin-staff'),
+        ('hotel-admin', 'Hotel-admin'),
+        ('hotel-admin-staff', 'Hotel-admin-staff'),
+    )
+
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=255)
     first_name = models.CharField(max_length=100, blank=True, null=True)
@@ -85,6 +95,8 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    roles = models.CharField(max_length=255, choices=ROLES_CHOICES, blank=True, null=True)
+
 
     groups = models.ManyToManyField(
         'auth.Group',
@@ -113,22 +125,22 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
             ("delete_user", "Can delete user"),
         ]
 
-class Module(models.Model):
-    name = models.CharField(max_length=100, unique=True)   # Example: "Hotel", "Activity", "SEO"
+# class Module(models.Model):
+#     name = models.CharField(max_length=100, unique=True)   # Example: "Hotel", "Activity", "SEO"
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
-class Permission(models.Model):
-    module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name="permissions")
-    code = models.CharField(max_length=100, unique=True)   # Example: "add_hotel", "edit_activity"
-    name = models.CharField(max_length=150)                # Human-readable name: "Can add hotel"
-    description = models.TextField(blank=True, null=True)
-    is_active = models.BooleanField(default=True)
+# class Permission(models.Model):
+#     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name="permissions")
+#     code = models.CharField(max_length=100, unique=True)   # Example: "add_hotel", "edit_activity"
+#     name = models.CharField(max_length=150)                # Human-readable name: "Can add hotel"
+#     description = models.TextField(blank=True, null=True)
+#     is_active = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f"{self.module.name} - {self.name}"
+#     def __str__(self):
+#         return f"{self.module.name} - {self.name}"
 
 
 # class Role(models.Model):

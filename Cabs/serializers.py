@@ -105,6 +105,7 @@ class CabAdminCreateSerializer(serializers.ModelSerializer):
         user = UserAccount(
             email=validated_data['email'],
             username=validated_data['username'],
+            roles='cab-admin', 
         )
         user.set_password(password)
         user.save()
