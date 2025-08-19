@@ -52,7 +52,7 @@ class DestinationSerializer(serializers.ModelSerializer):
             'longitude', 'map_link', 'highlight_heading', 'highlight_description',
             'best_visit_time', 'avg_cost', 'activities', 'activity_id', 'is_active',
             'order', 'weather', 'currency', 'travel_type', 'highlight_images',
-            'highlight_images_data',"destination_type"
+            'highlight_images_data',"kind_of_destination"
         ]
 
     def get_main_destination_image_url(self, obj):
