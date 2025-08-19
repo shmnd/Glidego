@@ -99,7 +99,7 @@ class Destination(AbstractDateFieldMix):
     opening_time = models.TextField(_('Opening Time to Visit'), blank=True, null=True)
     closing_time = models.TextField(_('Closing Time to Visit'), blank=True, null=True)
     
-    destination_type = models.CharField(max_length=255,choices=DESTINATION_TYPE,blank=True, null=True)
+    kind_of_destination = models.CharField(max_length=255,choices=DESTINATION_TYPE,blank=True, null=True)
 
 
 
