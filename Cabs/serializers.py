@@ -143,7 +143,7 @@ class DriverSerializer(serializers.ModelSerializer):
             'id', 'name', 'phone_number', 'email', 'license_number', 'license_expiry',
             'address', 'profile_image', 'aadhar_number', 'aadhar_document',
             'police_verification', 'is_verified', 'is_active', 'total_rides',
-            'created_at' #image
+            'created_at', 'gender' , 'experience' , 'language' #image
         ]
 
     def validate_license_number(self, value):
@@ -208,7 +208,7 @@ class CabSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'vehicle', 'vehicle_id', 'driver', 'driver_id', 'category', 'category_id',
             'price_per_km', 'is_available', 'rating', 'is_verified', 'is_active',
-            'base_fare', 'description', 'total_trips',
+            'base_fare', 'description', 'total_trips', 'longitude', 'latitude'
         ]
 
 # Cab status change
