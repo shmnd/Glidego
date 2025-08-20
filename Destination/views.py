@@ -40,7 +40,7 @@ class DestinationListCreateAPIView(APIView):
                 destination = serializer.save()
                 logger.info(f"Destination created successfully: ID {destination.id}")
                 return Response(
-                    {"message": "Destination created successfully", "id": destination.id},
+                    {"message": "Destination created successfully","data": serializer.data},
                     status=status.HTTP_201_CREATED
                 )
             logger.error(f"Serializer errors: {serializer.errors}")
