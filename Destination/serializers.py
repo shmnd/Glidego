@@ -73,6 +73,19 @@ class DestinationSerializer(serializers.ModelSerializer):
                 f"Invalid travel_type: {value}. Must be one of {valid_choices}."
             )
         return value
+    
+    def validate_kind_of_destination(self, value):
+        logger.debug(f"Validating kind_of_destination: {value} (type: {type(value)})")
+        
+        valid_choices = [choice[0] for choice in Destination.DESTINATION_TYPE]
+
+        if value and value not in valid_choices:
+            logger.error(f"Invalid kind_of_destination: {value}. Must be one of {valid_choices}.")
+            raise serializers.ValidationError(
+                f"Invalid kind_of_destination: {value}. Must be one of {valid_choices}."
+            )
+        
+        return value
 
     def validate_activity_id(self, value):
         logger.debug(f"Validating activity_id: {value}")
