@@ -31,6 +31,7 @@ class ActivitySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class DestinationSerializer(serializers.ModelSerializer):
+    id   = serializers.IntegerField(allow_null=True,required=False)
     activities = ActivitySerializer(read_only=True)
     activity_id = serializers.IntegerField(write_only=True, required=False, allow_null=True)
     main_destination_image = serializers.FileField(write_only=True, required=False, allow_null=True)

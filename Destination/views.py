@@ -9,7 +9,7 @@ from .serializers import ActivitySerializer, DestinationSerializer
 from django.core.exceptions import PermissionDenied
 from glidego.permissions import has_permission  # Adjust import based on where has_permission is defined
 from django.db.models import Q
-
+# from drf_yasg.utils import swagger_auto_schema
 import logging
 
 logger = logging.getLogger(__name__)
@@ -27,6 +27,9 @@ class DestinationListCreateAPIView(APIView):
         except Exception as e:
             logger.error(f"Error fetching destinations: {str(e)}")
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    
+    # @swagger_auto_schema(tags=['estination-create'],request_body=DestinationSerializer)
 
     def post(self, request):
         try:
