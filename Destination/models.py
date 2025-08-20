@@ -67,7 +67,7 @@ class Destination(AbstractDateFieldMix):
         ('historical', 'Historical'),
         ('adventure', 'Adventure'),
         ('wildlife', 'Wildlife / Safari'),
-        ('other', 'Other'),
+        ('kind_of_destination', 'Kind of destinationther'),
     ]
 
 
@@ -95,9 +95,6 @@ class Destination(AbstractDateFieldMix):
     weather = models.URLField(_('Weather'), blank=True, null=True)
     currency = models.CharField(_('Currency'), max_length=255, blank=True, null=True)
     travel_type = models.CharField(_('Travel Type'), max_length=255, choices=TravelType.choices, blank=True, null=True)
-
-    opening_time = models.TextField(_('Opening Time to Visit'), blank=True, null=True)
-    closing_time = models.TextField(_('Closing Time to Visit'), blank=True, null=True)
     
     kind_of_destination = models.CharField(max_length=255,choices=DESTINATION_TYPE,blank=True, null=True)
 
