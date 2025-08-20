@@ -81,7 +81,9 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = [
-            'id', 'hotel_id', 'hotel', 'room_type', 'name', 'description', 'price',
+            'id', 'hotel_id', 'hotel', 'room_type', 'name', 'description',
+            'sqft', 'room_no', 'block', 'floor','parking', 'buffet', 'tv', 
+            'balcony', 'wifi', 'ac', 'amenities', 'price', 'offer',
             'availability', 'max_occupancy', 'facilities', 'image', 'gallery_input', 'gallery', 'is_active'
         ]
         extra_kwargs = {
@@ -90,6 +92,18 @@ class RoomSerializer(serializers.ModelSerializer):
             'name': {'required': False, 'allow_null': True},
             'description': {'required': False, 'allow_null': True},
             'price': {'required': True},
+            'offer': {'required': False, 'allow_null': True},
+            'sqft': {'required': False, 'allow_null': True},
+            'room_no': {'required': False, 'allow_null': True},
+            'block': {'required': False, 'allow_null': True},
+            'floor': {'required': False, 'allow_null': True},
+            'parking': {'required': False},
+            'buffet': {'required': False},
+            'tv': {'required': False},
+            'balcony': {'required': False},
+            'wifi': {'required': False},
+            'ac': {'required': False},
+            'amenities': {'required': False},
             'availability': {'required': False},
             'max_occupancy': {'required': True},
             'facilities': {'required': False, 'allow_null': True},
@@ -225,7 +239,8 @@ class HotelSerializer(serializers.ModelSerializer):
         fields = [
             'branch_id', 'branch', 'id', 'name', 'location', 'address', 'description',
             'facilities', 'main_image', 'gallery_input', 'gallery', 'contact_email',
-            'contact_phone', 'website', 'is_verified', 'is_active', 'rooms', 'created_at', 'updated_at'
+            'contact_phone', 'website', 'rooms', 'latitude', 'longitude', 'price', 'offer',
+            'rooms', 'created_at', 'updated_at' 'is_verified', 'is_active',
         ]
         extra_kwargs = {
             'name': {'required': True},
@@ -236,6 +251,10 @@ class HotelSerializer(serializers.ModelSerializer):
             'contact_email': {'required': False, 'allow_null': True},
             'contact_phone': {'required': False, 'allow_null': True},
             'website': {'required': False, 'allow_null': True},
+            'latitude': {'required': False, 'allow_null': True},
+            'longitude': {'required': False, 'allow_null': True},
+            'price': {'required': False, 'allow_null': True},
+            'offer': {'required': False, 'allow_null': True},
             'is_verified': {'required': False},
             'is_active': {'required': False},
         }
