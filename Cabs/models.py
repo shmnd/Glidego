@@ -8,6 +8,12 @@ from AuthUser.models import Permission
 
 class Driver(AbstractDateTimeFieldBaseModel):
     __safedelete_policy__ = SOFT_DELETE
+
+    class GenderType(models.TextChoices):
+        male    = 'Male'
+        female  = 'Female'
+        other   = 'Other'
+
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15,unique=True)
     email = models.EmailField(unique=True)
@@ -23,10 +29,9 @@ class Driver(AbstractDateTimeFieldBaseModel):
     total_rides = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    language = models.TextField(blank=True, null=True)
+    language = models.CharField(max_length=255,blank=True, null=True)
     experience = models.BigIntegerField(blank=True, null=True)
-
-
+    gender = models.CharField(max_length=100,choices=GenderType.choices,default=GenderType.male)
 
 
     def __str__(self):
@@ -46,7 +51,6 @@ class Driver(AbstractDateTimeFieldBaseModel):
 # Vehicle model
 class Vehicle(AbstractDateTimeFieldBaseModel):
     
-
     class FuelType(models.TextChoices):
         petrol    = 'Petrol'
         deisel  = 'Deisel'
@@ -73,14 +77,9 @@ class Vehicle(AbstractDateTimeFieldBaseModel):
     transmission = models.CharField(max_length=25,blank=True, null=True)
     luggage = models.TextField(blank=True, null=True)
     air_conditioning = models.CharField(max_length=25,blank=True, null=True)
-    rent_per_km = models.PositiveIntegerField(blank=True, null=True)
-    rent_per_km = models.PositiveIntegerField(blank=True, null=True)
     rent_per_day = models.PositiveIntegerField(blank=True, null=True)
-    transmission = models.CharField(max_length=25,blank=True, null=True)
-    luggage = models.TextField(blank=True, null=True)
-    air_conditioning = models.CharField(max_length=25,blank=True, null=True)
     rent_per_km = models.PositiveIntegerField(blank=True, null=True)
-    rent_per_km = models.PositiveIntegerField(blank=True, null=True)
+    rent_per_hour = models.PositiveIntegerField(blank=True, null=True)
     rent = models.PositiveIntegerField(blank=True, null=True)
 
 
