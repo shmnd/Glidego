@@ -143,7 +143,7 @@ class DriverSerializer(serializers.ModelSerializer):
             'id', 'name', 'phone_number', 'email', 'license_number', 'license_expiry',
             'address', 'profile_image', 'aadhar_number', 'aadhar_document',
             'police_verification', 'is_verified', 'is_active', 'total_rides',
-            'images', 'created_at'
+            'created_at' #image
         ]
 
     def validate_license_number(self, value):

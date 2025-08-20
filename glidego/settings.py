@@ -72,6 +72,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'drf_yasg',
     
     'rest_framework',
      "corsheaders",
@@ -229,3 +231,14 @@ GOOGLE_MAPS_API_KEYS = {
 #     },
 # }
 
+SWAGGER_SETTINGS = {
+    'DEFAULT_API_URL' : os.environ.get('SWAGGER_DEFAULT_API_URL', ""),
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+}
