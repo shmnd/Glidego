@@ -1,5 +1,5 @@
-from django.urls import path  
-from .views import LoginView, StaffCreateAPIView, StaffDeleteAPIView, StaffDetailAPIView, StaffListAPIView, StaffUpdateAPIView
+from django.urls import path,re_path,include
+from .views import LoginView, StaffCreateAPIView, StaffDeleteAPIView, StaffDetailAPIView, StaffListAPIView, StaffUpdateAPIView,CreateOrUpdateCustomerApiView
 
 
 urlpatterns=[
@@ -9,5 +9,8 @@ urlpatterns=[
   path('staff/<int:id>/', StaffDetailAPIView.as_view(), name='staff-detail'),
   path('staff/<int:id>/update/', StaffUpdateAPIView.as_view(), name='staff-update'),
   path('staff/<int:id>/delete/', StaffDeleteAPIView.as_view(), name='staff-delete'),
-    
+
+  re_path(r'^shamnad/', include([
+    path('create-or-update-user', CreateOrUpdateCustomerApiView.as_view()),
+  ])),
 ]

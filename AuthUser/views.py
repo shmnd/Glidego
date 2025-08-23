@@ -6,8 +6,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, BasePermission
-
-from .serializers import StaffCreateSerializer, StaffDetailSerializer
+from helpers.helper import get_object_or_none
+from .serializers import StaffCreateSerializer, StaffDetailSerializer,CreateOrUpdateCustomerSerializer
 import logging
 
 
@@ -132,3 +132,34 @@ class StaffDeleteAPIView(generics.DestroyAPIView):
 
     def get_queryset(self):
         return UserAccount.objects.filter(is_superuser=False)
+    
+
+
+# shamnad code
+class CreateOrUpdateCustomerApiView(generics.GenericAPIView):
+
+    serializer_class = CreateOrUpdateCustomerSerializer
+    # permission_classes = (IsAuthenticated,)
+    
+    def post(self, request):
+        try:
+
+            user_instance = get_object_or_none(UserAccount, pk=request.data.get('user'))
+            print(user_instance,'aaaaaaaaaaaaaaaaaaaaaaa')
+
+            # serializer = self.serializer_class(data=request.data, context = {'request' : request})
+            # if not serializer.is_valid():
+            #     return Response({'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+            # user_instance = get_object_or_none(UserAccount,pk=serializer.validated_data.get('user', None))
+
+            serializer = self.serializer_class(user_instance, data=request.data, context = {'request' : request})
+            
+            if not serializer.is_valid():
+                return Response({'error':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            
+            serializer.save()
+            return Response({'data':serializer.data,'message':'Succes'}, status=status.HTTP_200_OK)
+            
+        except Exception as e:
+            return Response({'error':{str(e)}}, status=status.HTTP_500_INTERNAL_SERVER_ERROR) 

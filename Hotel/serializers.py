@@ -240,7 +240,7 @@ class HotelSerializer(serializers.ModelSerializer):
             'branch_id', 'branch', 'id', 'name', 'location', 'address', 'description',
             'facilities', 'main_image', 'gallery_input', 'gallery', 'contact_email',
             'contact_phone', 'website', 'rooms', 'latitude', 'longitude', 'price', 'offer',
-            'rooms', 'created_at', 'updated_at' 'is_verified', 'is_active',
+            'rooms', 'created_at', 'updated_at', 'is_verified', 'is_active',
         ]
         extra_kwargs = {
             'name': {'required': True},
