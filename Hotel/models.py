@@ -52,6 +52,69 @@ class Hotels(AbstractDateTimeFieldBaseModel):
     price = models.PositiveBigIntegerField(blank=True, null=True)
     offer = models.PositiveBigIntegerField(blank=True, null=True)
 
+# Facilities (Booleans)
+    gym = models.BooleanField(default=False)
+    swimming_pool = models.BooleanField(default=False)
+    restaurant = models.BooleanField(default=False)
+    free_cancellation = models.BooleanField(default=False)
+    no_advance_needed = models.BooleanField(default=False)
+    front_desk_24h = models.BooleanField(default=False)
+    free_parking = models.BooleanField(default=False)
+    room_service = models.BooleanField(default=False)
+    free_wifi = models.BooleanField(default=False)
+    outdoor_seating = models.BooleanField(default=False)
+    staff_support_24h = models.BooleanField(default=False)
+    business_facilities = models.BooleanField(default=False)
+    cctv_parking = models.BooleanField(default=False)
+    cctv_outside = models.BooleanField(default=False)
+    cctv_common_areas = models.BooleanField(default=False)
+    security_24h = models.BooleanField(default=False)
+    lift = models.BooleanField(default=False)
+    airport_shuttle = models.BooleanField(default=False)
+    spa = models.BooleanField(default=False)
+    pets_allowed = models.BooleanField(default=False)
+
+
+    # housekeeping_daily = models.BooleanField(default=False)
+    # multi_lang_staff = models.CharField(max_length=255,blank=True, null=True)
+    # city_view = models.BooleanField(default=False)
+    # safety_security = models.BooleanField(default=False)
+
+    Whats_nearby =models.TextField(blank=True, null=True) #eg lake , hills
+
+    attractions_nearby = models.TextField(blank=True, null=True)
+    closest_airports = models.TextField(blank=True, null=True)
+    closest_railways = models.TextField(blank=True, null=True)
+    closest_bus_station = models.TextField(blank=True, null=True)
+    closest_metro = models.TextField(blank=True, null=True)
+
+    Cancellation_policy = models.TextField(blank=True, null=True)
+    prepayment_policy = models.TextField(blank=True, null=True)
+    payment_policy = models.TextField(blank=True, null=True)
+
+    hotel_rules = models.TextField(blank=True, null=True)
+
+
+# foriegn key
+    # customer_feedback = models.TextField(blank=True, null=True)
+    # customer_rating = models.PositiveIntegerField(blank=True, null=True)
+
+
+
+
+# Check-in / Check-out / Age Policy
+    check_in_time = models.TimeField(blank=True, null=True)
+    check_out_time = models.TimeField(blank=True, null=True)
+    # min_checkin_age = models.PositiveIntegerField(default=18)
+
+# Payments
+    # accepts_card = models.BooleanField(default=True)
+    # accepts_cash = models.BooleanField(default=True)
+
+
+
+
+
 
 
     def __str__(self):
@@ -95,6 +158,16 @@ class Room(AbstractDateTimeFieldBaseModel):
     amenities = models.BooleanField(default=False)
     price = models.PositiveBigIntegerField(blank=True, null=True)
     offer = models.PositiveBigIntegerField(blank=True, null=True)
+
+# Room (extra fields to add)
+    kitchen = models.BooleanField(default=False)
+    breakfast_included = models.BooleanField(default=False)
+    room_service = models.BooleanField(default=False)
+    housekeeping_daily = models.BooleanField(default=False)
+
+
+    # non_smoking = models.BooleanField(default=True)
+    # restaurant_access = models.BooleanField(default=False)
 
 
     def __str__(self):
