@@ -5,6 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import logging
+from helpers.helper import get_object_or_none
 
 UserAccount = get_user_model()
 logger = logging.getLogger(__name__)
@@ -198,3 +199,78 @@ class StaffDetailSerializer(serializers.ModelSerializer):
 
     def get_permissions(self, obj):
         return [perm.codename for perm in obj.user_permissions.all()]
+
+
+   
+    
+# by shamnad
+class CreateOrUpdateCustomerSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True,required=False)
+    user = serializers.IntegerField(allow_null=True, required=False)
+    first_name = serializers.CharField(required=False)
+    last_name = serializers.CharField(required=False)
+    email = serializers.EmailField(required=False)
+    password =serializers.CharField(write_only=True,min_length=8)
+
+
+    class Meta:
+        model = UserAccount
+        fields = ['id','user','first_name', 'last_name', 'email', 'password']
+
+    def validate(self,attrs):
+        email           = attrs.get('email', '')
+        user            = attrs.get('user', None)
+        password        = attrs.get('password', None)
+
+        user_query_set = UserAccount.objects.filter(email=email)
+
+        if user is not None:
+            user_instance = get_object_or_none(UserAccount,pk=user)
+            user_query_set = user_query_set.exclude(pk=user_instance.pk)
+            
+        if user_query_set.exists():
+            raise serializers.ValidationError({"email":('Email already exists!')})
+        
+        # if password is not None and len(password) < 8 or not any(char.isupper() for char in password) or not any(char.islower() for char in password or not any(char.isdigit() for char in password) or not any(char in '!@#$%^&*()_+-=[]{}|;:,.<>?\'\"\\/~`' for char in password)):
+        if (
+            password is not None
+            and (
+                len(password) < 8
+                or not any(char.isupper() for char in password)
+                or not any(char.islower() for char in password)
+                or not any(char.isdigit() for char in password)
+                or not any(char in '!@#$%^&*()_+-=[]{}|;:,.<>?\'\"\\/~`' for char in password)
+            )
+        ):
+            raise serializers.ValidationError({"password":('Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Character')})
+        
+        return attrs
+
+
+    def create(self, validated_data):
+        password = validated_data.get('password')
+
+        instance = UserAccount()
+        instance.first_name = validated_data.get('first_name')
+        instance.last_name = validated_data.get('last_name')
+        instance.email = validated_data.get('email')
+
+        instance.set_password(password)
+
+        instance.save()
+        return instance
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop("password", None)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.email = validated_data.get('email', instance.email)
+
+        if password:
+            instance.set_password(password) 
+
+        instance.save()
+        return instance
+        
+
+
