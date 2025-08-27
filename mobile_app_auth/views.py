@@ -59,8 +59,7 @@ class SendOTPView(APIView):
             if not settings.ACCOUNT_SID or not settings.AUTH_TOKEN or not twilio_number:
                 return Response({"status": False, "error": "Twilio credentials are missing"}, status=500)
             
-            print(settings.ACCOUNT_SID,settings.AUTH_TOKEN,twilio_number,'credential')
-
+            
             try:
                 message = client.messages.create(
                     body=f"Your OTP for Glidego {otp}",
