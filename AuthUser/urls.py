@@ -10,7 +10,7 @@ urlpatterns=[
   path('staff/<int:id>/update/', StaffUpdateAPIView.as_view(), name='staff-update'),
   path('staff/<int:id>/delete/', StaffDeleteAPIView.as_view(), name='staff-delete'),
 
-  re_path(r'^shamnad/', include([
+  re_path(r'^Custmer-login/', include([
     path('create-or-update-user', CreateOrUpdateCustomerApiView.as_view()),
   ])),
 ]

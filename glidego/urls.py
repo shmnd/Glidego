@@ -39,6 +39,7 @@ urlpatterns = [
         path("cab/", include('Cabs.urls')),
         path("activity/",include('Activity.urls')),
         path("planner/",include('Planner.urls')),
+        path("mobile-app-auth/",include('mobile_app_auth.urls')),
 
     ])),
 
