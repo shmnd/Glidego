@@ -125,7 +125,10 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
             ("delete_user", "Can delete user"),
         ]
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9459bbfd603d4b9fd48f38e917c8f538f3ec9ef6
 # class Module(models.Model):
 #     name = models.CharField(max_length=100, unique=True)   # Example: "Hotel", "Activity", "SEO"
 
