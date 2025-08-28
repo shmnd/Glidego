@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r*n1q1td&d-$1h^f8+kry4losglohb(0)x2#i7fvn#9i7a)olj'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -212,12 +212,7 @@ AUTH_USER_MODEL = 'AuthUser.UserAccount'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-GOOGLE_MAPS_API_KEYS = {
-    "directions": "AIzaSyBGX6KP8c1L_zrzRTysUU-rEiJlyiXBfmU",
-    "places": "AIzaSyAp3MFgPLLIvizsUTiwAI3Jvyw8jd-G_kU",
-    "geocoding": "AIzaSyCIUTz-X-Z4erwhM-m4nVfpFNne1R2RIGM",
-}
-
+GOOGLE_MAPS_API_KEYS = os.getenv('GOOGLE_MAPS_API_KEYS')
 
 # LOGGING = {
 #     'version': 1,
@@ -243,3 +238,14 @@ SWAGGER_SETTINGS = {
         }
     },
 }
+
+
+
+ACCOUNT_SID  = os.getenv('ACCOUNT_SID')
+AUTH_TOKEN   = os.getenv('AUTH_TOKEN')
+TWILIO_NUMBER   = os.getenv('TWILIO_NUMBER')
+
+
+AUTHENTICATION_BACKENDS = ["mobile_app_auth.views.EmailOrUsernameBackend"]
+
+

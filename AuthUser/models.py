@@ -86,7 +86,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     )
 
     email = models.EmailField(max_length=255, unique=True)
-    username = models.CharField(max_length=255)
+    username = models.CharField(max_length=255,unique=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True, null=True)
