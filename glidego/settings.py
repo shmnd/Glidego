@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'Activity',
     'Hotel',
     'Planner',
+    'mobile_app_auth'
 ]
 
 MIDDLEWARE = [

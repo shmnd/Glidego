@@ -39,10 +39,7 @@ urlpatterns = [
         path("cab/", include('Cabs.urls')),
         path("activity/",include('Activity.urls')),
         path("planner/",include('Planner.urls')),
-<<<<<<< HEAD
         path("mobile-app-auth/",include('mobile_app_auth.urls')),
-=======
->>>>>>> 9459bbfd603d4b9fd48f38e917c8f538f3ec9ef6
 
     ])),
 
