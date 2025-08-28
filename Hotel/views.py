@@ -15,6 +15,10 @@ from glidego.permissions import  has_permission
 from .serializers import BranchSerializer, HotelAdminCreateSerializer, HotelAdminListSerializer, HotelAdminUpdateSerializer, HotelSerializer, HotelVerificationSerializer, RoomSerializer
 from django.contrib.auth import get_user_model
 
+from drf_yasg import openapi
+from functools import reduce
+from django.db.models import Q
+
 UserAccount = get_user_model()
 logger = logging.getLogger(__name__)
 
@@ -463,3 +467,30 @@ class HotelVerificationAPIView(APIView):
 #         except Exception as e:
 #             logger.exception("Error creating Hotel Admin")
 #             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+# hotel search by location -----------------------------
+
+class GetHotelsListApiView(APIView):
+
+    serializer_class = HotelSerializer
+    place = openapi.Parameter('place',openapi.IN_QUERY,type=openapi.TYPE_STRING,description="The search value",required=False)
+
+    @swagger_auto_schema(tags=['Hotel listing'],manual_parameters=[place])
+    def get (self,request):
+        try:
+            place    = request.GET.get('place',None)
+
+            filter_queryset = []
+
+            if place not in ['',None]:
+                filter_queryset.append(Q(location__icontains=place) | Q(address__icontains=place))
+
+            combained_filter = reduce(lambda x,y : x&y,filter_queryset,Q())
+            queryset  = Hotels.objects.filter(combained_filter)
+            serializer    = self.serializer_class(queryset,many=True,context={'request':request})
+          
+            return Response({'status':True,'Messaage':'sucess','Data':serializer.data},status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'status':False,'error':str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

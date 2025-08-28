@@ -51,6 +51,7 @@ class Hotels(AbstractDateTimeFieldBaseModel):
     longitude = models.DecimalField(_('Longitude'), max_digits=9, decimal_places=6, blank=True, null=True)
     price = models.PositiveBigIntegerField(blank=True, null=True)
     offer = models.PositiveBigIntegerField(blank=True, null=True)
+    map_link = models.URLField(_('Map Link'), blank=True, null=True)
 
 # Facilities (Booleans)
     gym = models.BooleanField(default=False)

@@ -5,7 +5,7 @@ from Hotel.views import (
     HotelAdminCreateAPIView, HotelAdminDetailAPIView, HotelAdminListAPIView, HotelAdminUpdateAPIView,
     HotelCreateAPIView, HotelDeleteAPIView, HotelDetailAPIView, HotelListAPIView, HotelStatusChangeAPIView,
     HotelUpdateAPIView, HotelVerificationAPIView, RoomCreateAPIView, RoomDeleteAPIView, RoomDetailAPIView, RoomListAPIView, RoomUpdateAPIView,
-    HotelPublicListAPIView, HotelPublicDetailAPIView  # Add new views
+    HotelPublicListAPIView, HotelPublicDetailAPIView, GetHotelsListApiView  # Add new views
 )
 
 urlpatterns = [
@@ -39,6 +39,10 @@ urlpatterns = [
     path('hotel-admin-update/<int:pk>/', HotelAdminUpdateAPIView.as_view(), name='hotel-admin-update'),
     path('hotel-admin-detail/<int:pk>/', HotelAdminDetailAPIView.as_view(), name='hotel-admin-detail'),
 
+    re_path(r'^Hotel-detail-place/', include([
+        path('list-hotel', GetHotelsListApiView.as_view()),
+
+     ])),
     # stafff
     # path('hotel-staff-creation/', HotelStaffCreateAPIView.as_view(), name='hotel-staff-create'),
 
